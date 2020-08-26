@@ -9,6 +9,10 @@ const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED =0;
+
+
 const db=knex({
   client: 'pg',
   connection: {
@@ -18,20 +22,6 @@ const db=knex({
   }
   }
 });
-
-
-
-db.connect();
-
-db.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  db.end();
-});
-
-
 
 
 const app=express();
